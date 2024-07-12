@@ -1,7 +1,7 @@
 {
   "name": "legacy-app",
   "version": "1.0.0",
-  "main": "expo/AppEntry.js",
+  "main": "src/App.tsx",
   "scripts": {
     "start": "expo start",
     "android": "expo run:android",
@@ -11,16 +11,44 @@
     "eas:preview": "eas build -p android --profile preview"
   },
   "dependencies": {
+    "@expo/config": "~9.0.0",
+    "@react-native-picker/picker": "2.7.5",
+    "@react-navigation/drawer": "^6.7.0",
+    "@react-navigation/native": "^6.1.17",
+    "@react-navigation/native-stack": "^6.10.0",
+    "@rneui/themed": "^4.0.0-rc.8",
+    "@tanstack/react-query": "^5.51.1",
+    "axios": "^1.7.2",
     "expo": "~51.0.20",
+    "expo-dev-client": "~4.0.20",
+    "expo-device": "~6.0.2",
+    "expo-document-picker": "~12.0.2",
+    "expo-notifications": "~0.28.9",
+    "expo-secure-store": "~13.0.2",
     "expo-status-bar": "~1.12.1",
+    "formik": "^2.4.6",
+    "install": "^0.13.0",
+    "moment": "^2.30.1",
     "react": "18.2.0",
     "react-native": "0.74.3",
-    "expo-device": "~6.0.2",
-    "expo-notifications": "~0.28.9"
+    "react-native-date-picker": "^5.0.4",
+    "react-native-file-viewer": "^2.1.5",
+    "react-native-fs": "^2.20.0",
+    "react-native-gesture-handler": "~2.16.1",
+    "react-native-htmlview": "^0.17.0",
+    "react-native-image-picker": "^7.1.2",
+    "react-native-pell-rich-editor": "^1.9.0",
+    "react-native-reanimated": "~3.10.1",
+    "react-native-safe-area-context": "4.10.1",
+    "react-native-screens": "3.31.1",
+    "react-native-webview": "13.8.6",
+    "yup": "^1.4.0",
+    "zustand": "^4.5.4"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@types/react": "~18.2.45",
+    "i": "^0.3.7",
     "typescript": "^5.1.3"
   },
   "private": true

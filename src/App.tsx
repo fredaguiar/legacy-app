@@ -1,8 +1,10 @@
-import { useState, useEffect, useRef } from 'react';
-import { Text, View, Button, Platform } from 'react-native';
+import { AppRegistry, View, Platform } from 'react-native';
+import { Button, Text, makeStyles, useTheme } from '@rneui/themed';
+import { registerRootComponent } from 'expo';
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import Constants from 'expo-constants';
+import { useEffect, useRef, useState } from 'react';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -12,7 +14,7 @@ Notifications.setNotificationHandler({
   }),
 });
 
-async function sendPushNotification(expoPushToken) {
+async function sendPushNotification(expoPushToken: string) {
   const message = {
     to: expoPushToken,
     sound: 'default',
@@ -32,7 +34,7 @@ async function sendPushNotification(expoPushToken) {
   });
 }
 
-function handleRegistrationError(errorMessage) {
+function handleRegistrationError(errorMessage: string) {
   alert(errorMessage);
   throw new Error(errorMessage);
 }
@@ -71,7 +73,7 @@ async function registerForPushNotificationsAsync() {
       ).data;
       console.log(pushTokenString);
       return pushTokenString;
-    } catch (e) {
+    } catch (e: unknown) {
       handleRegistrationError(`${e}`);
     }
   } else {
@@ -81,14 +83,16 @@ async function registerForPushNotificationsAsync() {
 
 export default function App() {
   const [expoPushToken, setExpoPushToken] = useState('');
-  const [notification, setNotification] = useState(undefined);
-  const notificationListener = useRef();
-  const responseListener = useRef();
+  const [notification, setNotification] = useState<Notifications.Notification | undefined>(
+    undefined,
+  );
+  const notificationListener = useRef<Notifications.Subscription>();
+  const responseListener = useRef<Notifications.Subscription>();
 
   useEffect(() => {
     registerForPushNotificationsAsync()
       .then((token) => setExpoPushToken(token ?? ''))
-      .catch((error) => setExpoPushToken(`${error}`));
+      .catch((error: any) => setExpoPushToken(`${error}`));
 
     notificationListener.current = Notifications.addNotificationReceivedListener((notification) => {
       setNotification(notification);
@@ -115,7 +119,7 @@ export default function App() {
         <Text>Data: {notification && JSON.stringify(notification.request.content.data)}</Text>
       </View>
       <Button
-        title="Press to Send Notification"
+        title="Press to Send Notification 8"
         onPress={async () => {
           await sendPushNotification(expoPushToken);
         }}
@@ -123,3 +127,12 @@ export default function App() {
     </View>
   );
 }
+
+AppRegistry.registerComponent('main', () => App);
+
+/* 
+To move App.tsx from ./ to ./src/
+  - package.json: "main": "src/App.tsx",
+  - Override node_modules\expo\AppEntry.js 
+*/
+registerRootComponent(App);
