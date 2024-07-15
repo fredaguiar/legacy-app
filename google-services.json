@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "563943486215",
+    "project_id": "legacy-push-notification",
+    "storage_bucket": "legacy-push-notification.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:563943486215:android:c09dd2bb9b21e16205cba2",
+        "android_client_info": {
+          "package_name": "com.fredaguiar.legacyapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFKilUiFGXu_pd8IIKj142v0EKChgYPy0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

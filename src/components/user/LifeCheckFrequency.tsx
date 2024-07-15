@@ -1,5 +1,5 @@
 import { TouchableOpacity, View } from 'react-native';
-import { Button, Text, useTheme, ListItem, ButtonGroup } from '@rneui/themed';
+import { Button, Text, useTheme, ButtonGroup } from '@rneui/themed';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import DatePicker from 'react-native-date-picker';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -9,10 +9,10 @@ import moment from 'moment';
 import useUserStore from '../../store/useUserStore';
 import { IconButtonsSaveCancel } from '../ui/IconButtons';
 import PickerUI from '../ui/PickerUI';
-import { SHARE_COUNT, SHARE_COUNT_TYPE, SHARE_COUNT_NOT_ANSWERED, WEEKDAY } from '../../Const';
+import { SHARE_COUNT, SHARE_COUNT_TYPE, SHARE_COUNT_NOT_ANSWERED } from '../../Const';
 import { useEffect, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { getUserProfile, updateUserProfileApi } from '../../services/authApi';
+import { getUserProfile, updateLifeCheckApi } from '../../services/userApi';
 import SpinnerUI from '../ui/SpinnerUI';
 import ErrorMessageUI from '../ui/ErrorMessageUI';
 import { MenuDrawerParams } from '../../navigator/MenuDrawer';
@@ -55,8 +55,8 @@ const LifeCheckFrequency = () => {
     isError: isErrorUpdate,
     error: errorUpdate,
   } = useMutation({
-    mutationFn: updateUserProfileApi,
-    onSuccess: (result: TUserUpdate) => {
+    mutationFn: updateLifeCheckApi,
+    onSuccess: (result: TUserLifeCheckUpdate) => {
       const { shareTime, shareWeekdays, shareCount, shareCountType, shareCountNotAnswered } =
         result.lifeCheck;
       updateUserLifeCheck({
@@ -97,6 +97,7 @@ const LifeCheckFrequency = () => {
           style={{ marginRight: 5 }}
         />
       </TouchableOpacity>
+
       <Formik
         enableReinitialize
         validationSchema={validationSchema}
@@ -117,13 +118,6 @@ const LifeCheckFrequency = () => {
               shareCountType: values.shareCountType,
               shareCountNotAnswered: values.shareCountNotAnswered,
             },
-            fieldsToUpdate: [
-              'lifeCheck.shareTime',
-              'lifeCheck.shareWeekdays',
-              'lifeCheck.shareCount',
-              'lifeCheck.shareCountType',
-              'lifeCheck.shareCountNotAnswered',
-            ],
           });
         }}>
         {({ handleChange, handleSubmit, setFieldValue, values, errors, touched }) => (

@@ -82,14 +82,14 @@ type TUserUpdate = {
   mobileVerified?: boolean;
   introductionViewed?: boolean;
   storageQuotaInMB?: number;
-  lifeCheck: {
-    active?: boolean;
-    shareTime?: string;
-    shareWeekdays?: Array<string>;
-    shareCount?: number;
-    shareCountType?: TShareCountType;
-    shareCountNotAnswered?: number;
-  };
+  // lifeCheck: {
+  //   active?: boolean;
+  //   shareTime?: string;
+  //   shareWeekdays?: Array<string>;
+  //   shareCount?: number;
+  //   shareCountType?: TShareCountType;
+  //   shareCountNotAnswered?: number;
+  // };
   fieldsToUpdate: TUserFieldsToUpdate[];
 };
 
@@ -98,7 +98,7 @@ type TUserUpdate = {
 //   'firstName' | 'lastName' | 'language' | 'country' | 'email' | 'phoneCountry' | 'phone'
 // >;
 
-type TUserLifeCheckUpdate = Pick<TUserUpdate, 'lifeCheck'>;
+type TUserLifeCheckUpdate = Pick<TUser, 'lifeCheck'>;
 
 type TUserFieldsToUpdate =
   | 'firstName'

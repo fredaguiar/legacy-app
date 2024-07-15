@@ -5,10 +5,6 @@ import moment from 'moment';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { MenuDrawerParams } from '../../navigator/MenuDrawer';
 import useUserStore from '../../store/useUserStore';
-import { IconButtonsSaveCancel } from '../ui/IconButtons';
-import LifeCheckUI from '../ui/LifeCheckUI';
-import { MapsUtil } from '../../utils/MapsUtil';
-import { WEEKDAY } from '../../Const';
 import { convertTimeToDate } from '../../utils/DateUtil';
 import { capitalizeFirstLetter } from '../../utils/StringUtil';
 
@@ -39,16 +35,6 @@ const LifeCheckSetup = () => {
           style={{ marginRight: 5 }}
         />
       </TouchableOpacity>
-
-      {/* <View
-        style={{
-          backgroundColor: colors.background2,
-          alignItems: 'center',
-          marginBottom: 20,
-          padding: 20,
-        }}>
-        <LifeCheckUI currentScreen="setup" />
-      </View> */}
 
       <Button
         onPress={() => {

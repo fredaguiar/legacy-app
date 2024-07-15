@@ -5,7 +5,7 @@ import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { useMutation } from '@tanstack/react-query';
 import SwitchUI from './SwitchUI';
 import useUserStore from '../../store/useUserStore';
-import { updateUserProfileApi } from '../../services/authApi';
+import { updateLifeCheckApi } from '../../services/userApi';
 import ErrorMessageUI from './ErrorMessageUI';
 import SpinnerUI from './SpinnerUI';
 import { MenuDrawerParams } from '../../navigator/MenuDrawer';
@@ -17,8 +17,8 @@ const LifeCheckUI = ({ currentScreen, style }: Props) => {
   const navigation = useNavigation<NavigationProp<MenuDrawerParams>>();
 
   const { mutate, isPending, isError, error } = useMutation({
-    mutationFn: updateUserProfileApi,
-    onSuccess: (result: TUserUpdate) => {
+    mutationFn: updateLifeCheckApi,
+    onSuccess: (result: TUserLifeCheckUpdate) => {
       updateUserLifeCheck({ lifeCheck: result.lifeCheck });
       // redirect to Life Check Setup screen if the user it is "on" but schedule has not been configured yet
       if (result?.lifeCheck.active && user?.lifeCheck.shareTime === undefined) {
@@ -44,10 +44,7 @@ const LifeCheckUI = ({ currentScreen, style }: Props) => {
         <SwitchUI
           on={user?.lifeCheck.active || false}
           onToggle={(on: boolean) => {
-            mutate({
-              lifeCheck: { active: on },
-              fieldsToUpdate: ['lifeCheck.active'],
-            });
+            mutate({ lifeCheck: { active: on } });
           }}
           disabled={isPending}
         />

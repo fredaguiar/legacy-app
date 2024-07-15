@@ -10,7 +10,7 @@ import { COUNTRIES, COUNTRY_TIMEZONES, LANGUAGES } from '../../Const';
 import ErrorMessageUI from '../ui/ErrorMessageUI';
 import SpinnerUI from '../ui/SpinnerUI';
 import PickerUI from '../ui/PickerUI';
-import { getUserProfile, updateUserProfileApi } from '../../services/authApi';
+import { getUserProfile, updateUserProfileApi } from '../../services/userApi';
 import useUserStore from '../../store/useUserStore';
 import { MenuDrawerParams } from '../../navigator/MenuDrawer';
 import { IconButtonsSaveCancel } from '../ui/IconButtons';
@@ -92,7 +92,6 @@ const UserProfile = ({}: {}) => {
               timezone: values.timezone,
               phoneCountry: values.phoneCountry,
               phone: values.phone,
-              lifeCheck: {},
               fieldsToUpdate: [
                 'firstName',
                 'lastName',

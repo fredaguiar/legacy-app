@@ -10,6 +10,7 @@ import useUserStore from '../../store/useUserStore';
 import useSafeStore from '../../store/useSafeStore';
 import useSearchStore from '../../store/useSearchStore';
 import SearchSafesResult from '../safe/lists/SearchSafesResult';
+import LifeCheckConfirmModalUI from '../ui/LifeCheckConfirmModalUI';
 
 const Home = () => {
   const {
@@ -23,6 +24,7 @@ const Home = () => {
   return (
     <View style={styles.container}>
       <View style={styles.containerHeader}>
+        <LifeCheckConfirmModalUI />
         <SearchFiles />
       </View>
       <Divider style={{ borderWidth: 1, borderColor: colors.divider2 }} />

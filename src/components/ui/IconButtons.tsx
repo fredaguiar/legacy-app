@@ -2,7 +2,7 @@ import { Text, useTheme } from '@rneui/themed';
 import { StyleProp, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-type TIconButton = 'save' | 'cancel' | 'yes' | 'no';
+type TIconButton = 'save' | 'cancel' | 'yes' | 'no' | 'lifeCheck';
 type TIconButtonValues = { label: string; iconName: string };
 const iconButtonMap: Record<TIconButton, TIconButtonValues> = {
   save: {
@@ -20,6 +20,10 @@ const iconButtonMap: Record<TIconButton, TIconButtonValues> = {
   no: {
     label: 'No',
     iconName: 'close',
+  },
+  lifeCheck: {
+    label: 'Yes!',
+    iconName: 'check',
   },
 };
 

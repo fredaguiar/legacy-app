@@ -1,6 +1,6 @@
 import { LinearProgress } from '@rneui/themed';
 import { useQuery } from '@tanstack/react-query';
-import { getStorageInfoApi } from '../../services/authApi';
+import { getStorageInfoApi } from '../../services/userApi';
 import { View, Text } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import SpinnerUI from './SpinnerUI';
