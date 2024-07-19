@@ -38,7 +38,6 @@ export const SHARE_COUNT = [
 ];
 
 export const SHARE_COUNT_TYPE = [
-  { label: 'hours', value: 'hours' },
   { label: 'days', value: 'days' },
   { label: 'weeks', value: 'weeks' },
 ];

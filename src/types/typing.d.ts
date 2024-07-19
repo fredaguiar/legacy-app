@@ -66,7 +66,7 @@ type TSignUp = Omit<TUser, 'type' | 'token' | 'emailVerified' | 'mobileVerified'
 
 type TCredentials = Pick<TUser, 'email' | 'password'>;
 
-type TShareCountType = 'week' | 'days' | 'hours';
+type TShareCountType = 'week' | 'days';
 
 type TUserUpdate = {
   firstName?: string;

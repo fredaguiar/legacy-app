@@ -105,7 +105,7 @@ const LifeCheckFrequency = () => {
           shareTime: convertTimeToDate(data?.lifeCheck.shareTime),
           shareWeekdays: convertWeekdayToIndexes(data?.lifeCheck.shareWeekdays),
           shareCount: data?.lifeCheck.shareCount || 2,
-          shareCountType: data?.lifeCheck.shareCountType || 'hours',
+          shareCountType: data?.lifeCheck.shareCountType || 'days',
           shareCountNotAnswered: data?.lifeCheck.shareCountNotAnswered || 5,
         }}
         onSubmit={(values) => {

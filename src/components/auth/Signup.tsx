@@ -55,30 +55,30 @@ const Signup = ({}: {}) => {
         </View>
         <Formik
           validationSchema={validationSchema}
-          // initialValues={{
-          //   firstName: '',
-          //   lastName: '',
-          //   language: 'br',
-          //   country: 'pt',
-          //   timezone: '',
-          //   email: '',
-          //   phoneCountry: '',
-          //   phone: '',
-          //   password: '',
-          //   confirmPassword: '',
-          // }}
           initialValues={{
-            firstName: 'Gen',
-            lastName: 'Haven',
-            language: 'pt',
-            country: 'br',
+            firstName: '',
+            lastName: '',
+            language: 'br',
+            country: 'pt',
             timezone: '',
-            email: 'a@gmail.com',
-            phoneCountry: '1',
-            phone: '7788720124',
-            password: '11111111',
-            confirmPassword: '11111111',
+            email: '',
+            phoneCountry: '',
+            phone: '',
+            password: '',
+            confirmPassword: '',
           }}
+          // initialValues={{
+          //   firstName: 'Lupita',
+          //   lastName: 'Navalha',
+          //   language: 'pt',
+          //   country: 'br',
+          //   timezone: '',
+          //   email: 'a@gmail.com',
+          //   phoneCountry: '1',
+          //   phone: '7788720124',
+          //   password: '11111111',
+          //   confirmPassword: '11111111',
+          // }}
           onSubmit={(values) => {
             // console.log(values);
             mutate({
