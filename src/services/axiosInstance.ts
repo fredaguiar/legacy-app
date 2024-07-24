@@ -11,11 +11,6 @@ export const headerFormData = {
   'Content-Type': 'multipart/form-data',
 };
 
-console.log(
-  'axios.create process.env.EXPO_PUBLIC_API_SERVER_URI ',
-  process.env.EXPO_PUBLIC_API_SERVER_URI,
-);
-
 const axiosInstance = axios.create({
   baseURL: process.env.EXPO_PUBLIC_API_SERVER_URI,
   timeout: 30000, // 30 seconds

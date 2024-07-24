@@ -46,7 +46,6 @@ const SearchFiles = () => {
 
   return (
     <View style={{ paddingTop: 10, backgroundColor: colors.background1 }}>
-      <Text>dev 2</Text>
       <ErrorMessageUI display={isError} message={error?.message} />
       <View
         style={{

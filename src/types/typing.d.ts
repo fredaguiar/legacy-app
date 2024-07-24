@@ -56,6 +56,7 @@ type TUser = {
     shareCount?: number;
     shareCountType?: TShareCountType;
     shareCountNotAnswered?: number;
+    notConfiguredYet?: boolean;
   };
   safes: TSafe[];
 };
@@ -119,7 +120,8 @@ type TUserFieldsToUpdate =
   | 'lifeCheck.shareWeekdays'
   | 'lifeCheck.shareCount'
   | 'lifeCheck.shareCountType'
-  | 'lifeCheck.shareCountNotAnswered';
+  | 'lifeCheck.shareCountNotAnswered'
+  | 'lifeCheck.notConfiguredYet';
 
 type TUploadFilesResult = {
   name: string;

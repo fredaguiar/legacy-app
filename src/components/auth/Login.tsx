@@ -49,7 +49,7 @@ const Login = ({}: {}) => {
         <Formik
           validationSchema={validationSchema}
           initialValues={{
-            email: 'fastrategy@gmail.com',
+            email: 'fatstrategy@gmail.com',
             password: '11111111',
           }}
           onSubmit={(values) => {
@@ -88,14 +88,9 @@ const Login = ({}: {}) => {
                   <Text style={{ textDecorationLine: 'underline', fontSize: 20 }}>
                     Not a member yet? Sign up.
                   </Text>
-                  <Text style={{ fontSize: 12, marginTop: 20 }}>
-                    backend host: {process.env.EXPO_PUBLIC_API_SERVER_URI}
-                  </Text>
-                  <Text style={{ fontSize: 12 }}>build id: {process.env.EAS_BUILD_ID}</Text>
-                  <Text style={{ fontSize: 12 }}>
-                    build profile: {process.env.EAS_BUILD_PROFILE}
-                  </Text>
                 </TouchableOpacity>
+                <Text style={{ fontSize: 14, marginTop: 20 }}>Version description:</Text>
+                <Text style={{ fontSize: 14 }}>sms and email notification to contacts.</Text>
               </View>
             </View>
           )}

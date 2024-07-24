@@ -42,7 +42,7 @@ const Signup = ({}: {}) => {
     },
   });
   const [terms, setTerms] = useState(false);
-  const [timezoneOptions, setTimezoneOptions] = useState<TTimezone[]>();
+  const [timezoneOptions, setTimezoneOptions] = useState<TTimezone[]>(TIMEZONE_BRAZIL);
   const navigation = useNavigation<NavigationProp<PublicRootStackParams>>();
 
   if (isPending) return <SpinnerUI />;
@@ -58,9 +58,9 @@ const Signup = ({}: {}) => {
           initialValues={{
             firstName: '',
             lastName: '',
-            language: 'br',
-            country: 'pt',
-            timezone: '',
+            language: 'pt',
+            country: 'br',
+            timezone: 'America/Sao_Paulo',
             email: '',
             phoneCountry: '',
             phone: '',
@@ -97,7 +97,7 @@ const Signup = ({}: {}) => {
           }}>
           {({ handleChange, handleBlur, handleSubmit, values, errors, touched, setFieldValue }) => {
             useEffect(() => {
-              const timezones = COUNTRY_TIMEZONES[values.country] || [];
+              const timezones = COUNTRY_TIMEZONES[values.country] || TIMEZONE_BRAZIL;
               setTimezoneOptions(timezones);
               setFieldValue('timezone', timezones[0]?.value || '');
             }, [values.country]);

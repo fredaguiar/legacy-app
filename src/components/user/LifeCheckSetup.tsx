@@ -5,7 +5,11 @@ import moment from 'moment';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { MenuDrawerParams } from '../../navigator/MenuDrawer';
 import useUserStore from '../../store/useUserStore';
-import { convertTimeToDate } from '../../utils/DateUtil';
+import {
+  convertTimeToDate,
+  convertWeekdayToIndexes,
+  convertIndexesToWeekday,
+} from '../../utils/DateUtil';
 import { capitalizeFirstLetter } from '../../utils/StringUtil';
 
 const LifeCheckSetup = () => {
@@ -14,6 +18,11 @@ const LifeCheckSetup = () => {
   } = useTheme();
   const navigation = useNavigation<NavigationProp<MenuDrawerParams>>();
   const { user } = useUserStore();
+
+  const weekdayIndexesSorted = convertWeekdayToIndexes(user?.lifeCheck.shareWeekdays).sort();
+  const weekdaySorted = convertIndexesToWeekday(weekdayIndexesSorted)
+    .map((weekday) => capitalizeFirstLetter(weekday))
+    .join(', ');
 
   return (
     <View style={{ backgroundColor: colors.background1, flex: 1 }}>
@@ -60,13 +69,7 @@ const LifeCheckSetup = () => {
               padding: 20,
             }}>
             Send Life-check messages every
-            <Text style={{ fontWeight: 'bold' }}>
-              {' '}
-              {user?.lifeCheck.shareWeekdays
-                ?.map((weekday) => capitalizeFirstLetter(weekday))
-                .join(', ')}
-            </Text>
-            , at
+            <Text style={{ fontWeight: 'bold' }}> {weekdaySorted}</Text>, at
             <Text style={{ fontWeight: 'bold' }}>
               {' '}
               {moment(convertTimeToDate(user?.lifeCheck.shareTime)).format('h:mm a')}
