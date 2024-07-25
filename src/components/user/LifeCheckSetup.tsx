@@ -11,6 +11,7 @@ import {
   convertIndexesToWeekday,
 } from '../../utils/DateUtil';
 import { capitalizeFirstLetter } from '../../utils/StringUtil';
+import BackButton from '../ui/BackButton';
 
 const LifeCheckSetup = () => {
   const {
@@ -103,14 +104,7 @@ const LifeCheckSetup = () => {
       <Text style={{ fontSize: 18, alignSelf: 'center', marginBottom: 20, marginHorizontal: 20 }}>
         Please make sure you have access to the email and SMS inboxes.
       </Text>
-      <TouchableOpacity
-        style={{ alignItems: 'center', flexDirection: 'row', justifyContent: 'center' }}
-        onPress={() => {
-          navigation.goBack();
-        }}>
-        <MaterialCommunityIcons name="arrow-left-bold" size={40} style={{}} />
-        <Text>Back</Text>
-      </TouchableOpacity>
+      <BackButton />
     </View>
   );
 };

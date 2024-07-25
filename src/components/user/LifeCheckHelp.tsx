@@ -3,6 +3,7 @@ import { Text, makeStyles, useTheme } from '@rneui/themed';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { MenuDrawerParams } from '../../navigator/MenuDrawer';
+import BackButton from '../ui/BackButton';
 
 const LifeCheckHelp = () => {
   const {
@@ -43,14 +44,7 @@ const LifeCheckHelp = () => {
         </Text>
       </View>
 
-      <TouchableOpacity
-        style={{ alignItems: 'center', flexDirection: 'row', justifyContent: 'center' }}
-        onPress={() => {
-          navigation.goBack();
-        }}>
-        <MaterialCommunityIcons name="arrow-left-bold" size={40} style={{}} />
-        <Text>Back</Text>
-      </TouchableOpacity>
+      <BackButton />
     </View>
   );
 };

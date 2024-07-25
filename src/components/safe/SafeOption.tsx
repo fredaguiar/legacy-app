@@ -17,6 +17,7 @@ import SwitchUI from '../ui/SwitchUI';
 import { deleteSafeListApi } from '../../services/safeApi';
 import StorageUsage from '../ui/StorageUsage';
 import ConfirmModalUI from '../ui/ConfirmModalUI';
+import BackButton from '../ui/BackButton';
 
 const validationName = yup.object().shape({
   name: yup.string().required('Name is required'),
@@ -86,7 +87,7 @@ const SafeOption = () => {
       setDescription(data.description || '');
       setSelectedSafeId(data._id || '');
       setAutoSharing(data.autoSharing || false);
-
+      console.log('data.autoSharing', data.autoSharing);
       setSafeNameError('');
       setDescriptionError('');
     }
@@ -209,6 +210,7 @@ const SafeOption = () => {
           }}>
           <ButtonSafe title="Delete safe" iconName="delete-outline" onPress={toggleDeleteModal} />
         </View>
+        <BackButton />
         <StorageUsage />
         <ConfirmModalUI
           // safeId={selectedSafeId}
