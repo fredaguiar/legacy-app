@@ -45,10 +45,9 @@ const SafeOption = () => {
     theme: { colors },
   } = useTheme();
 
-  const { data, isPending, isError, error, refetch } = useQuery({
+  const { data, isPending, isError, error } = useQuery({
     queryKey: ['safeOptions', selectedSafeId],
     queryFn: () => getSafeApi({ safeId: selectedSafeId }),
-    enabled: !!selectedSafeId, // Ensure the query only runs when selectedSafeId is valid
   });
 
   const {
@@ -83,27 +82,19 @@ const SafeOption = () => {
   });
 
   useEffect(() => {
-    if (safeId !== selectedSafeId) {
-      setSelectedSafeId(safeId);
-    }
-  }, [safeId]);
-
-  useEffect(() => {
     if (data) {
       setSafeName(data.name || '');
       setDescription(data.description || '');
       setSelectedSafeId(data._id || '');
       setAutoSharing(data.autoSharing || false);
+      console.log('data.autoSharing', data.autoSharing);
       setSafeNameError('');
       setDescriptionError('');
     }
-  }, [data]);
-
-  useEffect(() => {
     if (isErrorDelete) {
       setDeleteModalVisible(false);
     }
-  }, [isErrorDelete]);
+  }, [data, isErrorDelete]);
 
   const toggleDeleteModal = () => {
     setDeleteModalVisible(!isDeleteModalVisible);

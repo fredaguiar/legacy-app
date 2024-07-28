@@ -216,3 +216,5 @@ type TWeekdays = 'sunday' | 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'f
 
 type TTimezone = { label: string; value: string };
 type TCountryTimezones = { [key: string]: TTimezone[] };
+
+type TPageLoadType = 'list' | 'dropdown' | 'none';

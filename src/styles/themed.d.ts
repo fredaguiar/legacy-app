@@ -16,5 +16,6 @@ declare module '@rneui/themed' {
     danger: string;
     important: string;
     highlight: string;
+    highlight2: string;
   }
 }

@@ -44,13 +44,6 @@ const StorageUsage = () => {
     data?.storageQuotaInMB === null ||
     data?.storageFileCount === null
   ) {
-    console.log(
-      'data?.storageUsedInBytes',
-      data?.storageUsedInBytes,
-      data?.storageQuotaInMB,
-      data?.storageFileCount,
-    );
-
     return <ErrorMessageUI display={isError} message={'Missing storage quota data'} />;
   }
   const usedStorageInMB = data.storageUsedInBytes / (1024 * 1024);

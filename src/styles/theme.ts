@@ -11,6 +11,7 @@ const LightColors = {
   disabled: '#b1b1b1',
   success: '#2CA62E',
   highlight: '#00ff00',
+  highlight2: '#02a202',
   danger: '#f77272',
   warning: '#ffc107',
   error: '#dc3545',

@@ -51,7 +51,7 @@ const MenuDrawerItem = (props: MenuDrawerItemProps) => {
 export type MenuDrawerParams = {
   Home: undefined;
   CreateSafe: undefined;
-  SafeOption: { safeId: string };
+  SafeOption: { safeId: string; pageLoad: TPageLoadType };
   LifeCheckSetup: undefined;
   LifeCheckHelp: undefined;
   LifeCheckFrequency: undefined;
