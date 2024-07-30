@@ -142,7 +142,7 @@ const ContactListUpdate = () => {
         />
         <ConfirmModalUI
           isVisible={modalDeleteVisible}
-          onClose={() => setModalDeleteVisible(false)}
+          onCancel={() => setModalDeleteVisible(false)}
           onConfirm={onConfirmDelete}
         />
 

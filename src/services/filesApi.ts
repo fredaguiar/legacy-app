@@ -27,8 +27,8 @@ export const uploadFilesApi = async ({
     >('private/uploadFiles', formData, { headers: headerFormData });
 
     json = response.data;
-  } catch (erroMerda) {
-    console.log('uploadFilesApi  erroMerda >>>>', erroMerda);
+  } catch (error) {
+    console.log('uploadFilesApi >>>>', error);
   }
 
   // console.log('uploadFilesApi >>>>', response.data);
@@ -95,5 +95,31 @@ export const searchApi = async ({
     headers: headerJson,
   });
 
+  return response.data;
+};
+
+export const renameFileApi = async ({
+  fileName,
+  safeId,
+  fileId,
+}: TFileUpdate): Promise<boolean> => {
+  const response = await axiosInstance.post<TFileUpdate, AxiosResponse<boolean>, TFileUpdate>(
+    'private/renameFile',
+    {
+      fileName,
+      safeId,
+      fileId,
+    },
+    { headers: headerJson },
+  );
+  return response.data;
+};
+
+export const deleteFileListApi = async (files: TFileDelete): Promise<boolean> => {
+  const response = await axiosInstance.post<TFileDelete, AxiosResponse<boolean>, TFileDelete>(
+    'private/deleteFileList',
+    files,
+    { headers: headerJson },
+  );
   return response.data;
 };

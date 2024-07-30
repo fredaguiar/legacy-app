@@ -147,6 +147,18 @@ type TFileInfo = {
   mimetype: string;
   searchMatch?: string;
   searchValue?: string;
+  checked?: boolean;
+};
+
+type TFileUpdate = {
+  fileName?: string;
+  fileId: string;
+  safeId: string;
+};
+
+type TFileDelete = {
+  fileIds: Array<string>;
+  safeId: string;
 };
 
 type TFileInfoList = {

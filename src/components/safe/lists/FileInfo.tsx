@@ -1,5 +1,5 @@
-import { StyleProp, View, ViewStyle } from 'react-native';
-import { Text, makeStyles, useTheme } from '@rneui/themed';
+import { StyleProp, View, ViewStyle, TouchableOpacity } from 'react-native';
+import { Text, makeStyles, CheckBox } from '@rneui/themed';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import moment from 'moment';
 import { FileTypeUtil } from '../../../utils/FileTypeUtil';
@@ -15,7 +15,19 @@ const formatDate = (date: Date) => {
   return moment().format('MMMM DD, YYYY h:mm a');
 };
 
-const FileInfo = ({ fileInfo, style }: { fileInfo: TFileInfo; style?: StyleProp<ViewStyle> }) => {
+const FileInfo = ({
+  fileInfo,
+  style,
+  edit,
+  onCheckFile,
+}: // isChecked = false,
+{
+  fileInfo: TFileInfo;
+  style?: StyleProp<ViewStyle>;
+  onCheckFile?: (fileInfo: TFileInfo) => void;
+  // isChecked?: boolean;
+  edit: boolean;
+}) => {
   const styles = useStyles();
 
   return (
@@ -30,24 +42,38 @@ const FileInfo = ({ fileInfo, style }: { fileInfo: TFileInfo; style?: StyleProp<
         <MaterialCommunityIcons
           name={FileTypeUtil.getFileTypeIcon(fileInfo.mimetype)}
           size={50}
-          style={{ marginHorizontal: 4, alignSelf: 'flex-start' }}
+          style={{ marginHorizontal: 4 }}
         />
         <View>
-          <Text style={{ width: 350 }}>{fileInfo.fileName}</Text>
+          <Text style={{ width: 300 }}>{fileInfo.fileName}</Text>
           <View
             style={{
               flexDirection: 'row',
-              justifyContent: 'space-between',
               alignItems: 'center',
             }}>
-            <Text style={styles.fontStyles}>{formatBytes(fileInfo.length)}</Text>
+            <Text style={[styles.fontStyles, { marginEnd: 20 }]}>
+              {formatBytes(fileInfo.length)}
+            </Text>
             <Text style={[styles.fontStyles, { marginEnd: 12 }]}>
               {FileTypeUtil.getFileTypeSimple(fileInfo.mimetype)}
             </Text>
-            <Text style={[styles.fontStyles, { marginEnd: 12 }]}>
-              {formatDate(fileInfo.uploadDate)}
-            </Text>
           </View>
+          <Text style={[styles.fontStyles, { marginEnd: 12 }]}>
+            {formatDate(fileInfo.uploadDate)}
+          </Text>
+        </View>
+        <View>
+          {edit && (
+            <CheckBox
+              containerStyle={{ marginLeft: 5 }}
+              checked={fileInfo.checked || false}
+              onPress={() => {
+                // fileInfo.checked = !isChecked;
+                console.log(' FILEID', fileInfo._id);
+                if (onCheckFile) onCheckFile(fileInfo);
+              }}
+            />
+          )}
         </View>
       </View>
       {fileInfo.searchMatch && fileInfo.searchValue && (
