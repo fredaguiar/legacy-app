@@ -34,10 +34,10 @@ const SearchSafesResult = () => {
           {item.files?.map((file) =>
             renderFileItem({
               item: file,
-              fileInfo: <FileInfo fileInfo={file} style={{ marginBottom: 10 }} />,
+              fileInfo: <FileInfo fileInfo={file} style={{ marginBottom: 10 }} edit={true} />,
             }),
           )}
-          <SafeInfo safeName={item.name || ''} safeId={item._id || ''} navigation={navigation} />
+          <SafeInfo safe={item} />
           {item.searchMatch && item.searchValue && (
             <View style={{ marginLeft: 10 }}>
               <HighlightedTextUI
@@ -59,7 +59,7 @@ const SearchSafesResult = () => {
               item: file,
               fileInfo: (
                 <View>
-                  <FileInfo fileInfo={file} style={{ marginBottom: 10 }} />
+                  <FileInfo fileInfo={file} style={{ marginBottom: 10 }} edit={true} />
                   <Divider
                     style={{ marginVertical: 0, borderWidth: 2, borderColor: colors.divider2 }}
                   />

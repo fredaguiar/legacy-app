@@ -1,4 +1,4 @@
-import { FlatList, StyleProp, TextStyle, View, ViewStyle, TouchableOpacity } from 'react-native';
+import { FlatList, StyleProp, TextStyle, View, ViewStyle } from 'react-native';
 import { useEffect, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Button, CheckBox, makeStyles, useTheme } from '@rneui/themed';
@@ -9,6 +9,7 @@ import { deleteFileListApi, getFileInfoListApi } from '../../../services/filesAp
 import SpinnerUI from '../../ui/SpinnerUI';
 import ErrorMessageUI from '../../ui/ErrorMessageUI';
 import FileInfo from './FileInfo';
+import RenameFileModal from './RenameFileModal';
 
 const FileList = () => {
   const { safeId } = useSafeStore();
@@ -16,11 +17,10 @@ const FileList = () => {
   const queryClient = useQueryClient();
   const [checkAll, setCheckAll] = useState(false);
   const [enableEdit, setEnableEdit] = useState(true);
-  const [selectedFile, setSelectedFile] = useState<TFileInfo>();
   const [dataFiles, setDataFiles] = useState<TFileInfoListResult>();
+  const [selectedFile, setSelectedFile] = useState<TFileInfo>();
   const [enableDelete, setEnableDelete] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
-  const styles = useStyles({});
   const {
     theme: { colors },
   } = useTheme();
@@ -68,28 +68,15 @@ const FileList = () => {
     setCheckAll(!checkAll);
   };
 
-  const getSelectedFiles = () => {
-    // const selectedKey = Object.keys(checkedFiles).filter(
-    //   (key) => checkedFiles[key].checked === true,
-    // )[0];
-    // const file = checkedFiles[selectedKey];
-    const file = data?.fileInfoList.filter((fileInfo) => {
-      return fileInfo.checked === true;
-      // checkedFilesCurrent[fileInfo._id] = fileInfo;
-    });
-
-    return file;
-  };
-
   const showEditModal = () => {
     setModalVisible(true);
   };
 
+  const getSelectedFile = () => {
+    return dataFiles?.fileInfoList.find((file) => file.checked === true);
+  };
+
   useEffect(() => {
-    // const countSelected = Object.values(checkedFiles).filter(
-    //   (file) => file.checked === true,
-    // ).length;
-    console.log('🚀 ~ useEffect 1111111111111 ~ data:', data);
     if (data) {
       const updatedDataFiles = data?.fileInfoList.map((file) => {
         return { ...file, checked: false };
@@ -100,71 +87,71 @@ const FileList = () => {
   }, [data]);
 
   useEffect(() => {
-    console.log('🚀 ~ useEffect 2222222222222222 ~ data:');
     const countSelected =
       dataFiles?.fileInfoList.filter((fileInfo) => {
         return fileInfo.checked === true;
       }).length || 0;
-    console.log('🚀 ~ useEffect ~ countSelected:', countSelected);
     setEnableEdit(countSelected === 1);
     setEnableDelete(countSelected > 0);
-    // setSelectedFile(countSelected === 1 ? getSelectedFiles() : undefined);
+    setSelectedFile(countSelected === 1 ? getSelectedFile() : undefined);
   }, [dataFiles]);
 
   if (isPendingList || isPendingDownload || isPendingDelete) return <SpinnerUI />;
 
-  // Object.values(checkedFiles).forEach((item) => {
-  //   console.log('🚀 ~ FileList ~ checkedFiles:', item.fileName, item.checked);
+  // dataFiles?.fileInfoList.filter((fileInfo) => {
+  //   console.log('🚀 ~ data?.fileInfoList.filter ~ fileInfo:', fileInfo.fileName, fileInfo.checked);
   // });
 
-  dataFiles?.fileInfoList.filter((fileInfo) => {
-    console.log('🚀 ~ data?.fileInfoList.filter ~ fileInfo:', fileInfo.fileName, fileInfo.checked);
-  });
-
   return (
-    <View>
+    <View style={{}}>
       <ErrorMessageUI display={errorDownload} message={errorDownload} />
       <ErrorMessageUI display={isErrorList} message={errorList?.message} />
-      <View style={{ alignItems: 'center', alignSelf: 'flex-end', flexDirection: 'row' }}>
-        <ButtonUpdate
-          title="Rename"
-          iconName="lead-pencil"
-          onPress={showEditModal}
-          disabled={!enableEdit}
-        />
-        <ButtonUpdate
-          title=""
-          iconName="delete"
-          onPress={() => {
-            // const fileIds: string[] = Object.values(checkedFiles)
-            //   .filter((file) => file.checked === true)
-            //   .map((file) => file._id);
-
-            const fileIds =
-              dataFiles?.fileInfoList
-                .filter((fileInfo) => {
-                  return fileInfo.checked === true;
-                })
-                .map((file) => file._id) || [];
-
-            console.log('🚀 ~ FileList ~ fileIds:', fileIds);
-            // mutateDelete({ safeId: safeId || '', fileIds });
-          }}
-          disabled={!enableDelete}
-        />
-
-        <CheckBox
-          style={{}}
-          containerStyle={{ marginRight: 15 }}
-          checked={checkAll}
-          onPress={handleCheckAll}
-          iconType="material-community"
-          checkedIcon="checkbox-marked"
-          uncheckedIcon="checkbox-blank-outline"
-          checkedColor="red"
-        />
-      </View>
+      <ErrorMessageUI display={isErrorDelete} message={errorDelete?.message} />
+      {dataFiles && dataFiles?.fileInfoList.length > 0 && (
+        <View
+          style={{
+            alignItems: 'center',
+            // alignSelf: 'flex-end',
+            flexDirection: 'row',
+            backgroundColor: colors.background1,
+          }}>
+          <ButtonUpdate
+            title="Rename"
+            iconName="lead-pencil"
+            onPress={showEditModal}
+            disabled={!enableEdit}
+          />
+          <ButtonUpdate
+            title=""
+            iconName="delete"
+            disabled={!enableDelete}
+            onPress={() => {
+              const fileIds =
+                dataFiles?.fileInfoList
+                  .filter((fileInfo) => {
+                    return fileInfo.checked === true;
+                  })
+                  .map((file) => file._id) || [];
+              mutateDelete({ safeId: safeId || '', fileIds });
+            }}
+          />
+          <View style={{ flex: 1, alignItems: 'flex-end' }}>
+            <CheckBox
+              style={{}}
+              containerStyle={{ marginRight: 15, padding: 0 }}
+              checked={checkAll}
+              onPress={handleCheckAll}
+              iconType="material-community"
+              checkedIcon="checkbox-marked"
+              uncheckedIcon="checkbox-blank-outline"
+              checkedColor="red"
+            />
+          </View>
+        </View>
+      )}
       <FlatList
+        contentContainerStyle={{ paddingBottom: 100 }}
+        scrollEnabled={true}
         data={dataFiles?.fileInfoList}
         renderItem={({ item }) =>
           renderFileItem({
@@ -183,6 +170,16 @@ const FileList = () => {
           })
         }
         keyExtractor={(item) => item._id}
+      />
+      <RenameFileModal
+        safeId={safeId || ''}
+        isVisible={modalVisible}
+        file={selectedFile}
+        onClose={() => setModalVisible(false)}
+        onRenameFileSuccess={(_result: boolean) => {
+          setModalVisible(false);
+          queryClient.invalidateQueries({ queryKey: ['files'] });
+        }}
       />
     </View>
   );
