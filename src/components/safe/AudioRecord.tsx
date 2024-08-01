@@ -186,7 +186,7 @@ const AudioRecord = () => {
       return;
     }
 
-    mutate({ name, type: 'audio/mp4', uri, safeId: selectedSafeId as string, fileName });
+    mutate({ name, type: 'audio/mp4', uri, safeId: selectedSafeId as string });
   };
 
   const pauseRecording = async () => {

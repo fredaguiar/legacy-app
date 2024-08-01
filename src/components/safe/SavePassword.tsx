@@ -123,7 +123,7 @@ const SavePassword = ({}: {}) => {
                 style={{ width: 400 }}
               />
               <Input
-                label="Tittle (Website, Bank Name, etc)"
+                label="Title (Website, Bank Name, etc)"
                 onChangeText={handleChange('fileName')}
                 onBlur={handleBlur('fileName')}
                 value={values.fileName}
