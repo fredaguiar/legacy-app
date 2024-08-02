@@ -1,13 +1,13 @@
 import { View, Text, StyleSheet } from 'react-native';
 import { useEffect } from 'react';
 import { Divider, Input } from '@rneui/themed';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import * as yup from 'yup';
 import { Formik } from 'formik';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { IconButtonsSaveCancel } from '../ui/IconButtons';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import ErrorMessageUI from '../ui/ErrorMessageUI';
-import { useMutation } from '@tanstack/react-query';
 import { createSafeApi } from '../../services/safeApi';
 import useSafeStore from '../../store/useSafeStore';
 import useUserStore from '../../store/useUserStore';
@@ -22,6 +22,7 @@ const CreateSafe = ({}: {}) => {
   const { addNewSafe } = useUserStore();
   const { setSafeId } = useSafeStore();
   const navigation = useNavigation<NavigationProp<MenuDrawerParams>>();
+  const queryClient = useQueryClient();
 
   useEffect(() => {}, []);
 
@@ -30,6 +31,7 @@ const CreateSafe = ({}: {}) => {
     onSuccess: (data: TSafe) => {
       addNewSafe(data);
       setSafeId(data._id);
+      queryClient.invalidateQueries({ queryKey: ['files'] });
       navigation.navigate('Home');
     },
   });

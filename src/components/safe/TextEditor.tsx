@@ -1,9 +1,8 @@
 import { useTheme } from '@rneui/themed';
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import RNFS from 'react-native-fs';
 import moment from 'moment';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Platform, KeyboardAvoidingView, SafeAreaView, ScrollView, View } from 'react-native';
 import { actions, RichEditor, RichToolbar } from 'react-native-pell-rich-editor';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -16,7 +15,6 @@ import { getItemApi, saveItemApi } from '../../services/safeApi';
 import { MenuDrawerParams } from '../../navigator/MenuDrawer';
 import TextSaveUI from '../ui/TextSaveUI';
 import SpinnerUI from '../ui/SpinnerUI';
-import { setEnabled } from 'react-native/Libraries/Performance/Systrace';
 
 const validationSchema = yup.object().shape({
   title: yup
@@ -32,7 +30,6 @@ const validationSchema = yup.object().shape({
 const TextEditor = () => {
   const richText = React.useRef<RichEditor>(null);
   const navigation = useNavigation<NavigationProp<MenuDrawerParams>>();
-  // const { uploadTextEditorFiles, data, isPendingUpload, error } = useUploadFiles();
   const { safeId } = useSafeStore();
   const queryClient = useQueryClient();
   const {
