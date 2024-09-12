@@ -17,9 +17,9 @@ import { IconButtonsSaveCancel } from '../ui/IconButtons';
 import { useEffect, useState } from 'react';
 
 const validationSchema = yup.object().shape({
-  firstName: yup.string().required('Name is Required'),
-  lastName: yup.string().required('Last name is Required'),
-  phone: yup.string().required('Phone is Required'),
+  firstName: yup.string().required('Name is required'),
+  lastName: yup.string().required('Last name is required'),
+  phone: yup.string().required('Phone is required'),
   phoneCountry: yup.string().required('Required'),
 });
 

@@ -5,11 +5,16 @@
   "build": {
     "development": {
       "developmentClient": true,
-      "distribution": "internal"
+      "distribution": "internal",
+      "env": {
+        "NODE_ENV": "development",
+        "EXPO_PUBLIC_API_SERVER_URI": "https://legacy-backend.xyz/legacy"
+      }
     },
     "preview": {
       "distribution": "internal",
       "env": {
+        "NODE_ENV": "production",
         "EXPO_PUBLIC_API_SERVER_URI": "https://legacy-backend.xyz/legacy"
       }
     },

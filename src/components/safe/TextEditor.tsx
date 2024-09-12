@@ -53,7 +53,6 @@ const TextEditor = () => {
   } = useMutation({
     mutationFn: saveItemApi,
     onSuccess: (_result: boolean) => {
-      console.log('savePasswordApi', _result);
       queryClient.invalidateQueries({ queryKey: ['files'] });
       queryClient.invalidateQueries({ queryKey: ['textEditor', fileId] });
       navigation.navigate('Home');

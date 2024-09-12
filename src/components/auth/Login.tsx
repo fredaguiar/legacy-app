@@ -48,10 +48,17 @@ const Login = ({}: {}) => {
         style={[GlobalStyles.AndroidSafeArea, GlobalStyles.SkyBackground, GlobalStyles.Container]}>
         <Formik
           validationSchema={validationSchema}
-          initialValues={{
-            email: 'fatstrategy@gmail.com',
-            password: '11111111',
-          }}
+          initialValues={
+            process.env.NODE_ENV === 'development'
+              ? {
+                  email: 'fatstrategy@gmail.com',
+                  password: '11111111',
+                }
+              : {
+                  email: '',
+                  password: '',
+                }
+          }
           onSubmit={(values) => {
             mutate({ email: values.email, password: values.password });
           }}>

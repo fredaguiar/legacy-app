@@ -52,8 +52,6 @@ const SavePassword = ({}: {}) => {
     setSelectedSafeId(SafeUtil.getSafeId({ safeId, user }));
   }, []);
 
-  console.log('SavePassword fileId', fileId);
-
   const {
     mutate,
     isPending: isPendingSave,
@@ -62,7 +60,6 @@ const SavePassword = ({}: {}) => {
   } = useMutation({
     mutationFn: saveItemApi,
     onSuccess: (_result: boolean) => {
-      console.log('savePasswordApi', _result);
       queryClient.invalidateQueries({ queryKey: ['files'] });
       queryClient.invalidateQueries({ queryKey: ['passwords', fileId] });
       navigation.navigate('Home');

@@ -1,10 +1,18 @@
 # Authentication Frontend
 
+## Install Node 20 lts
+
+```
+nvm install 20 --lts
+nvm list (copy the 20 lts)
+nvm use 20.x.x
+```
+
 ## Run in dev
 
 - npm run start
 
-## Build to prody
+## Build to prod
 
 - make sure that .env points to PROD
   NODE_ENV=production

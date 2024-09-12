@@ -23,7 +23,8 @@ import {
 } from '../../utils/DateUtil';
 
 const validationSchema = yup.object().shape({
-  shareWeekdays: yup.array().min(1, 'Select 1 or more weekdays'),
+  // shareWeekdays: yup.array().min(1, 'Select 1 or more weekdays'),
+  shareWeekdays: yup.array().min(1, 'Weekday is required'),
 });
 
 const LifeCheckFrequency = () => {
@@ -132,10 +133,12 @@ const LifeCheckFrequency = () => {
               <Text>Send life-checking every</Text>
               <ButtonGroup
                 buttons={['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']}
-                selectMultiple
-                selectedIndexes={values.shareWeekdays}
+                // selectMultiple
+                // selectedIndexes={values.shareWeekdays}
+                selectedIndex={values.shareWeekdays[0]}
                 onPress={(values) => {
-                  setFieldValue('shareWeekdays', values);
+                  // setFieldValue('shareWeekdays', values);
+                  setFieldValue('shareWeekdays[0]', values);
                 }}
               />
               {errors.shareWeekdays && touched.shareWeekdays && (
