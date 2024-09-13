@@ -29,12 +29,3 @@ export const signupApi = async (singup: TSignUp): Promise<TUser> => {
   );
   return response.data;
 };
-
-export const confirmMobileApi = async (code: number): Promise<boolean> => {
-  const response = await axiosInstance.post<number, AxiosResponse<boolean>, number>(
-    'public/confirmMobileApi',
-    code,
-    { headers: headerJson },
-  );
-  return response.data;
-};

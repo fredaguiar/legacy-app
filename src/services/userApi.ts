@@ -90,3 +90,12 @@ export const confirmLifeCheckApi = async (): Promise<boolean> => {
   );
   return response.data;
 };
+
+export const confirmMobileApi = async ({ code }: { code: number }): Promise<boolean> => {
+  const response = await axiosInstance.post<
+    { code: number },
+    AxiosResponse<boolean>,
+    { code: number }
+  >('private/confirmMobile', { code }, { headers: headerJson });
+  return response.data;
+};

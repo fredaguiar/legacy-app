@@ -8,7 +8,7 @@ import SpinnerUI from '../ui/SpinnerUI';
 import { useMutation } from '@tanstack/react-query';
 import { MenuDrawerParams } from '../../navigator/MenuDrawer';
 import useUserStore from '../../store/useUserStore';
-import { confirmMobileApi } from '../../services/authApi';
+import { confirmMobileApi } from '../../services/userApi';
 
 const ConfirmMobile = ({}: {}) => {
   const navigation = useNavigation<NavigationProp<MenuDrawerParams>>();
@@ -40,7 +40,7 @@ const ConfirmMobile = ({}: {}) => {
         onSubmit={(values) => {
           const codeStr = Object.keys(CODES).map((code) => values[code as keyof typeof CODES]);
           const code = parseInt(codeStr.join(''));
-          mutate(code);
+          mutate({ code });
         }}>
         {({ handleChange, handleBlur, handleSubmit, values }) => (
           <View style={{ display: 'flex', alignItems: 'center' }}>
