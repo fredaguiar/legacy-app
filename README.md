@@ -56,5 +56,6 @@ Solution:
 AxiosError: Network Error
 
 - do not use localhost in the android emulator
+- maybe you deleted .env
 - update the nodejs server ip address (ipconfig and .env)
 - check if the NodeJS server has crashed (uncaught exception maybe?)

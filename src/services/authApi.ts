@@ -3,7 +3,7 @@ import axiosInstance, { headerJson } from './axiosInstance';
 
 export const testApi = async (): Promise<void> => {
   try {
-    const response = await axiosInstance.get('test');
+    const response = await axiosInstance.get('public/test');
     console.log('response test', response.data);
   } catch (err: any) {
     console.log('Test API err test', err.stack);
@@ -25,6 +25,15 @@ export const signupApi = async (singup: TSignUp): Promise<TUser> => {
   const response = await axiosInstance.post<TSignUp, AxiosResponse<TUser>, TCredentials>(
     'public/signup',
     singup,
+    { headers: headerJson },
+  );
+  return response.data;
+};
+
+export const confirmMobileApi = async (code: number): Promise<boolean> => {
+  const response = await axiosInstance.post<number, AxiosResponse<boolean>, number>(
+    'public/confirmMobileApi',
+    code,
     { headers: headerJson },
   );
   return response.data;

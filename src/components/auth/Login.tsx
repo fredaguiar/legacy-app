@@ -34,6 +34,11 @@ const Login = ({}: {}) => {
     },
   });
 
+  // const { mutate, isPending, isError, error } = useMutation({
+  //   mutationFn: testApi,
+  //   onSuccess: (data: any) => {},
+  // });
+
   const navigation = useNavigation<NavigationProp<PublicRootStackParams>>();
 
   useEffect(() => {
@@ -97,7 +102,7 @@ const Login = ({}: {}) => {
                   </Text>
                 </TouchableOpacity>
                 <Text style={{ fontSize: 14, marginTop: 20 }}>Version description:</Text>
-                <Text style={{ fontSize: 14 }}>sms and email notification to contacts.</Text>
+                <Text style={{ fontSize: 14 }}>Sms and email notification to contacts.</Text>
               </View>
             </View>
           )}
