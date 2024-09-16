@@ -91,11 +91,20 @@ export const confirmLifeCheckApi = async (): Promise<boolean> => {
   return response.data;
 };
 
-export const confirmMobileApi = async ({ code }: { code: number }): Promise<boolean> => {
+export const confirmMobileApi = async ({ code }: { code: number }): Promise<TUser> => {
   const response = await axiosInstance.post<
     { code: number },
-    AxiosResponse<boolean>,
+    AxiosResponse<TUser>,
     { code: number }
   >('private/confirmMobile', { code }, { headers: headerJson });
+  return response.data;
+};
+
+export const resendConfirmEmailApi = async ({ email }: { email: string }): Promise<boolean> => {
+  const response = await axiosInstance.post<
+    { email: string },
+    AxiosResponse<boolean>,
+    { email: string }
+  >('private/resendConfirmEmail', { email }, { headers: headerJson });
   return response.data;
 };

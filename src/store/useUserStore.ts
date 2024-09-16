@@ -15,6 +15,8 @@ type TAuthState = {
     phone,
   }: Partial<TUserProfile>) => void;
   updateUserLifeCheck: ({ lifeCheck }: TUserLifeCheckUpdate) => void;
+  skipEmailConfirm: boolean;
+  setSkipEmailConfirm: (skip: boolean) => void;
 };
 
 const useUserStore = create<TAuthState>((set, get) => ({
@@ -73,6 +75,8 @@ const useUserStore = create<TAuthState>((set, get) => ({
       }
       return { ...state.user };
     }),
+  skipEmailConfirm: false,
+  setSkipEmailConfirm: (skip: boolean) => set(() => ({ skipEmailConfirm: skip })),
 }));
 
 export default useUserStore;

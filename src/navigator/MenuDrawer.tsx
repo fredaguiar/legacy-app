@@ -28,6 +28,9 @@ import TextEditor from '../components/safe/TextEditor';
 import AddItems from '../components/safe/AddItems';
 import CreateSafe from '../components/safe/CreateSafe';
 import LifeCheckFrequency from '../components/user/LifeCheckFrequency';
+import ConfirmEmail from '../components/setup/ConfirmEmail';
+import ConfirmMobile from '../components/setup/ConfirmMobile';
+import Introduction from '../components/setup/Introduction';
 
 const Drawer = createDrawerNavigator();
 
@@ -146,6 +149,9 @@ const MenuDrawer = () => {
       <Drawer.Screen name="SavePassword" component={SavePassword} />
       <Drawer.Screen name="AudioRecord" component={AudioRecord} />
       <Drawer.Screen name="UserProfile" component={UserProfile} />
+      <Drawer.Screen name="ConfirmEmail" component={ConfirmEmail} />
+      <Drawer.Screen name="ConfirmMobile" component={ConfirmMobile} />
+      <Drawer.Screen name="Introduction" component={Introduction} />
     </Drawer.Navigator>
   );
 };

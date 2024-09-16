@@ -4,20 +4,20 @@ import Introduction from '../components/setup/Introduction';
 import useUserStore from '../store/useUserStore';
 import MenuDrawer from './MenuDrawer';
 import PublicStack from './PublicStack';
-import SetupStack from './SetupStack';
 
 const RootNavigator = () => {
-  const { user } = useUserStore();
+  const { user, skipEmailConfirm } = useUserStore();
+
   if (!user) {
     return <PublicStack />;
   }
 
   if (!user.mobileVerified) {
-    return <SetupStack initialRouteName="ConfirmMobile" />;
+    return <ConfirmMobile />;
   }
 
-  if (!user.emailVerified) {
-    return <SetupStack initialRouteName="ConfirmEmail" />;
+  if (!user.emailVerified && !skipEmailConfirm) {
+    return <ConfirmEmail />;
   }
 
   if (!user.introductionViewed) {

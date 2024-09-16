@@ -56,7 +56,7 @@ const Login = ({}: {}) => {
           initialValues={
             process.env.NODE_ENV === 'development'
               ? {
-                  email: 'fatstrategy@gmail.com',
+                  email: 'fred.aguiar.teixeira@hotmail.com',
                   password: '11111111',
                 }
               : {

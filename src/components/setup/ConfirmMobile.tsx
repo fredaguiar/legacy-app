@@ -1,28 +1,23 @@
 import { Button, Input, Text, makeStyles } from '@rneui/themed';
 import { View } from 'react-native';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
 import GlobalStyles from '../../styles/GlobalStyles';
 import ErrorMessageUI from '../ui/ErrorMessageUI';
 import SpinnerUI from '../ui/SpinnerUI';
 import { useMutation } from '@tanstack/react-query';
-import { MenuDrawerParams } from '../../navigator/MenuDrawer';
 import useUserStore from '../../store/useUserStore';
 import { confirmMobileApi } from '../../services/userApi';
 
 const ConfirmMobile = ({}: {}) => {
-  const navigation = useNavigation<NavigationProp<MenuDrawerParams>>();
-  const { updateUserProfile } = useUserStore();
+  const { setUser } = useUserStore();
   const styles = useStyles();
 
   const CODES = { code1: '', code2: '', code3: '', code4: '', code5: '' };
 
   const { mutate, isPending, isError, error } = useMutation({
     mutationFn: confirmMobileApi,
-    onSuccess: (_response: boolean) => {
-      const profile: Partial<TUserProfile> = { mobileVerified: true };
-      updateUserProfile(profile);
-      navigation.navigate('Home');
+    onSuccess: (data: TUser) => {
+      setUser(data);
     },
   });
 
@@ -30,7 +25,12 @@ const ConfirmMobile = ({}: {}) => {
 
   return (
     <View
-      style={[GlobalStyles.AndroidSafeArea, GlobalStyles.SkyBackground, GlobalStyles.Container]}>
+      style={[
+        GlobalStyles.AndroidSafeArea,
+        GlobalStyles.SkyBackground,
+        GlobalStyles.Container,
+        { marginTop: 60 },
+      ]}>
       <Text>
         A number code was sent to your registered PHONE NUMBER via SMS. Please fill the space below
         with that code. The code will be expired in 10 minutes.
