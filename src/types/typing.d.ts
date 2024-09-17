@@ -230,3 +230,16 @@ type TTimezone = { label: string; value: string };
 type TCountryTimezones = { [key: string]: TTimezone[] };
 
 type TPageLoadType = 'list' | 'dropdown' | 'none';
+
+type TForgotPassword = {
+  method?: 'email' | 'sms';
+  email?: string;
+  phone?: string;
+  phoneCountry?: string;
+  code?: number;
+  password?: string;
+};
+
+type TForgotPasswordToken = {
+  token: string;
+};

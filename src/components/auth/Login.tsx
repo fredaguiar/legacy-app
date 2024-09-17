@@ -101,6 +101,13 @@ const Login = ({}: {}) => {
                     Not a member yet? Sign up.
                   </Text>
                 </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate('ForgotPassword')}
+                  style={{ marginBottom: 40 }}>
+                  <Text style={{ textDecorationLine: 'underline', fontSize: 20 }}>
+                    Forgot password?
+                  </Text>
+                </TouchableOpacity>
                 <Text style={{ fontSize: 14, marginTop: 20 }}>Version description:</Text>
                 <Text style={{ fontSize: 14 }}>Sms and email notification to contacts.</Text>
               </View>

@@ -29,3 +29,35 @@ export const signupApi = async (singup: TSignUp): Promise<TUser> => {
   );
   return response.data;
 };
+
+export const forgotPasswordApi = async (data: TForgotPassword): Promise<boolean> => {
+  const response = await axiosInstance.post<
+    TForgotPassword,
+    AxiosResponse<boolean>,
+    TForgotPassword
+  >('public/forgotPassword', data, { headers: headerJson });
+
+  return response.data;
+};
+
+export const forgotPasswordResetCodeApi = async (
+  data: TForgotPassword,
+): Promise<TForgotPasswordToken> => {
+  const response = await axiosInstance.post<
+    TForgotPassword,
+    AxiosResponse<TForgotPasswordToken>,
+    TForgotPassword
+  >('public/forgotPasswordResetCode', data, { headers: headerJson });
+
+  return response.data;
+};
+
+export const forgotPasswordConfirmApi = async (data: TForgotPassword): Promise<boolean> => {
+  const response = await axiosInstance.post<
+    TForgotPassword,
+    AxiosResponse<boolean>,
+    TForgotPassword
+  >('public/forgotPasswordConfirm', data, { headers: headerJson });
+
+  return response.data;
+};
