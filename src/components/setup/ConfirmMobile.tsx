@@ -1,6 +1,7 @@
 import { Button, Input, Text, makeStyles } from '@rneui/themed';
 import { View } from 'react-native';
 import { Formik } from 'formik';
+import * as yup from 'yup';
 import GlobalStyles from '../../styles/GlobalStyles';
 import ErrorMessageUI from '../ui/ErrorMessageUI';
 import SpinnerUI from '../ui/SpinnerUI';
@@ -8,11 +9,13 @@ import { useMutation } from '@tanstack/react-query';
 import useUserStore from '../../store/useUserStore';
 import { confirmMobileApi } from '../../services/userApi';
 
+const validationSchema = yup.object().shape({
+  code: yup.string().required('Code is Required'),
+});
+
 const ConfirmMobile = ({}: {}) => {
   const { setUser } = useUserStore();
   const styles = useStyles();
-
-  const CODES = { code1: '', code2: '', code3: '', code4: '', code5: '' };
 
   const { mutate, isPending, isError, error } = useMutation({
     mutationFn: confirmMobileApi,
@@ -36,26 +39,22 @@ const ConfirmMobile = ({}: {}) => {
         with that code. The code will be expired in 10 minutes.
       </Text>
       <Formik
-        initialValues={{ code1: '', code2: '', code3: '', code4: '', code5: '' }}
+        initialValues={{ code: '' }}
+        validationSchema={validationSchema}
         onSubmit={(values) => {
-          const codeStr = Object.keys(CODES).map((code) => values[code as keyof typeof CODES]);
-          const code = parseInt(codeStr.join(''));
-          mutate({ code });
+          mutate({ code: parseInt(values.code) });
         }}>
-        {({ handleChange, handleBlur, handleSubmit, values }) => (
+        {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
           <View style={{ display: 'flex', alignItems: 'center' }}>
             <View style={styles.inputTextView}>
-              {Object.keys(CODES).map((code) => (
-                <Input
-                  key={code}
-                  containerStyle={styles.inputText}
-                  onChangeText={handleChange(code)}
-                  onBlur={handleBlur(code)}
-                  value={values[code as keyof typeof CODES]}
-                  keyboardType="number-pad"
-                  maxLength={1}
-                />
-              ))}
+              <Input
+                label="Code"
+                onChangeText={handleChange('code')}
+                onBlur={handleBlur('code')}
+                value={values.code}
+                keyboardType="number-pad"
+                errorMessage={errors.code && touched.code ? errors.code : undefined}
+              />
             </View>
 
             <ErrorMessageUI display={isError} message={error?.message} />
