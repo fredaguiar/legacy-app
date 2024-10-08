@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import * as DocumentPicker from 'expo-document-picker';
-import RNFS from 'react-native-fs';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { uploadFilesApi } from '../services/filesApi';
 import useSafeStore from '../store/useSafeStore';

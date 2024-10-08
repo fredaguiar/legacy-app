@@ -109,7 +109,9 @@ const Login = ({}: {}) => {
                   </Text>
                 </TouchableOpacity>
                 <Text style={{ fontSize: 14, marginTop: 20 }}>Version description:</Text>
-                <Text style={{ fontSize: 14 }}>Sms and email notification to contacts.</Text>
+                <Text style={{ fontSize: 14 }}>
+                  Oct 8 2024 - Forgot password, confirm email and phone.
+                </Text>
               </View>
             </View>
           )}

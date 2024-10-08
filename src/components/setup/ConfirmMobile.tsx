@@ -1,19 +1,21 @@
+import { useState } from 'react';
 import { Button, Input, Text, makeStyles } from '@rneui/themed';
-import { View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
+import { useMutation } from '@tanstack/react-query';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import GlobalStyles from '../../styles/GlobalStyles';
 import ErrorMessageUI from '../ui/ErrorMessageUI';
 import SpinnerUI from '../ui/SpinnerUI';
-import { useMutation } from '@tanstack/react-query';
 import useUserStore from '../../store/useUserStore';
-import { confirmMobileApi } from '../../services/userApi';
+import { confirmMobileApi, resendConfirmMobileApi } from '../../services/userApi';
 
 const validationSchema = yup.object().shape({
   code: yup.string().required('Code is Required'),
 });
 
 const ConfirmMobile = ({}: {}) => {
+  const [resend, setResend] = useState(false);
   const { setUser } = useUserStore();
   const styles = useStyles();
 
@@ -24,7 +26,19 @@ const ConfirmMobile = ({}: {}) => {
     },
   });
 
-  if (isPending) return <SpinnerUI />;
+  const {
+    mutate: mutateResend,
+    isPending: isPendingResend,
+    isError: isErrorResend,
+    error: errorResend,
+  } = useMutation({
+    mutationFn: resendConfirmMobileApi,
+    onSuccess: (_data: boolean) => {
+      setResend(true);
+    },
+  });
+
+  if (isPending || isPendingResend) return <SpinnerUI />;
 
   return (
     <View
@@ -58,11 +72,22 @@ const ConfirmMobile = ({}: {}) => {
             </View>
 
             <ErrorMessageUI display={isError} message={error?.message} />
+            <ErrorMessageUI display={isErrorResend} message={errorResend?.message} />
             <Button
               onPress={handleSubmit as any}
               title="Confirm"
-              containerStyle={{ width: 300, marginBottom: 20 }}
+              containerStyle={{ width: 300, marginBottom: 50 }}
             />
+            <View style={{ display: 'flex', alignItems: 'center' }}>
+              <TouchableOpacity
+                onPress={() => {
+                  mutateResend({});
+                }}
+                style={{}}>
+                <Text style={{ textDecorationLine: 'underline', fontSize: 20 }}>Resend code</Text>
+              </TouchableOpacity>
+              {resend && <Text>Code sent.</Text>}
+            </View>
           </View>
         )}
       </Formik>

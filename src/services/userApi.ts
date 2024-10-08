@@ -108,3 +108,12 @@ export const resendConfirmEmailApi = async ({ email }: { email: string }): Promi
   >('private/resendConfirmEmail', { email }, { headers: headerJson });
   return response.data;
 };
+
+export const resendConfirmMobileApi = async ({}: {}): Promise<boolean> => {
+  const response = await axiosInstance.post<{}, AxiosResponse<boolean>, {}>(
+    'private/resendConfirmMobile',
+    {},
+    { headers: headerJson },
+  );
+  return response.data;
+};

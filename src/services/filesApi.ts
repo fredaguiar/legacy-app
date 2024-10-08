@@ -15,8 +15,6 @@ export const uploadFilesApi = async ({
   formData.append('safeId', safeId);
   formData.append('fileId', fileId || '');
 
-  console.log('uploadFilesApi >>>>', formData);
-
   let json = { name: 'ddddd', type: 'buceta' };
 
   try {
@@ -30,8 +28,6 @@ export const uploadFilesApi = async ({
   } catch (error) {
     console.log('uploadFilesApi >>>>', error);
   }
-
-  // console.log('uploadFilesApi >>>>', response.data);
 
   return json;
 };
