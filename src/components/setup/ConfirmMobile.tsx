@@ -9,6 +9,9 @@ import ErrorMessageUI from '../ui/ErrorMessageUI';
 import SpinnerUI from '../ui/SpinnerUI';
 import useUserStore from '../../store/useUserStore';
 import { confirmMobileApi, resendConfirmMobileApi } from '../../services/userApi';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import AuthUtil from '../../utils/AuthUtil';
+import useLogout from '../../hooks/useLogout';
 
 const validationSchema = yup.object().shape({
   code: yup.string().required('Code is Required'),
@@ -17,6 +20,7 @@ const validationSchema = yup.object().shape({
 const ConfirmMobile = ({}: {}) => {
   const [resend, setResend] = useState(false);
   const { setUser } = useUserStore();
+  const { logout } = useLogout();
   const styles = useStyles();
 
   const { mutate, isPending, isError, error } = useMutation({
@@ -78,7 +82,7 @@ const ConfirmMobile = ({}: {}) => {
               title="Confirm"
               containerStyle={{ width: 300, marginBottom: 50 }}
             />
-            <View style={{ display: 'flex', alignItems: 'center' }}>
+            <View style={{ display: 'flex', alignItems: 'center', marginBottom: 50 }}>
               <TouchableOpacity
                 onPress={() => {
                   mutateResend({});
@@ -88,6 +92,14 @@ const ConfirmMobile = ({}: {}) => {
               </TouchableOpacity>
               {resend && <Text>Code sent.</Text>}
             </View>
+            <TouchableOpacity
+              style={{ alignItems: 'center', flexDirection: 'row', justifyContent: 'center' }}
+              onPress={() => {
+                logout();
+              }}>
+              <MaterialCommunityIcons name="arrow-left-bold" size={40} style={{}} />
+              <Text>Back</Text>
+            </TouchableOpacity>
           </View>
         )}
       </Formik>

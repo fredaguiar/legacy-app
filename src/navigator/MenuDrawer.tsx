@@ -11,8 +11,6 @@ import { NavigationProp, useNavigation } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import useUserStore from '../store/useUserStore';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import * as SecureStore from 'expo-secure-store';
-import { JWT_TOKEN } from '../Const';
 import useSafeStore from '../store/useSafeStore';
 import Header from '../components/top/Header';
 import Home from '../components/home/Home';
@@ -31,6 +29,7 @@ import LifeCheckFrequency from '../components/user/LifeCheckFrequency';
 import ConfirmEmail from '../components/setup/ConfirmEmail';
 import ConfirmMobile from '../components/setup/ConfirmMobile';
 import Introduction from '../components/setup/Introduction';
+import useLogout from '../hooks/useLogout';
 
 const Drawer = createDrawerNavigator();
 
@@ -77,6 +76,7 @@ const MenuDrawerContent = (props: DrawerContentComponentProps) => {
   const navigation = useNavigation<NavigationProp<MenuDrawerParams>>();
   const { user, setUser } = useUserStore();
   const { setSafeId } = useSafeStore();
+  const { logout } = useLogout();
   const {
     theme: { colors },
   } = useTheme();
@@ -114,9 +114,7 @@ const MenuDrawerContent = (props: DrawerContentComponentProps) => {
         label="Logout"
         icon="logout"
         onPress={() => {
-          setUser(undefined);
-          setSafeId(undefined);
-          SecureStore.setItemAsync(JWT_TOKEN, '');
+          logout();
         }}
       />
       <Divider style={{ borderWidth: 1, borderColor: colors.divider }} />
